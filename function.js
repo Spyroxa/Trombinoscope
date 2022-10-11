@@ -3,7 +3,7 @@ function loads_student(students){
     students.forEach(element =>console.log(element));
     for(let i=0; i<=10; i++){
     fetch ('https://api.github.com/users/'+students[i],{
-            headers: new Headers({"Authorization": "Bearer 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"})})
+            headers: new Headers({"Authorization": "Bearer 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"})})
         .then(data => data.json())
         .then(results => affiche_student(results.avatar_url,results.login,results.followers,results.public_repos,results.followers_url))
         .then(console.log)
@@ -13,7 +13,7 @@ function loads_repos(students){
     students.forEach(element =>console.log(element));
     for(let i=0; i<=10; i++){
     fetch ('https://api.github.com/users/'+students[i]/'repos',{
-            headers: new Headers({"Authorization": "Bearer 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"})})
+            headers: new Headers({"Authorization": "Bearer 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"})})
         .then(data => data.json())
         .then(console.log)
     }
@@ -21,7 +21,7 @@ function loads_repos(students){
  function affiche_student(avatar_url,login,followers,public_repos,followers_url){
     console.log(avatar_url)
     let d = document.createElement("img");
-    let a = document.createElement("p")
+    let a = document.createElement("a")
     let f = document.createElement("p")
     let r = document.createElement("p")
     let follow = document.createElement("p")
@@ -34,6 +34,7 @@ function loads_repos(students){
     element.classList.add("img");
     var pseudo = document.getElementById("test").appendChild(a);
     pseudo.classList.add("pseudo")
+    pseudo.setAttribute('href', "https://github.com/"+login)
     var followers = document.getElementById("test").appendChild(f);
     followers.classList.add("follower")
     var repos = document.getElementById("test").appendChild(r);
