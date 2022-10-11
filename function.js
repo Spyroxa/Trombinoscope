@@ -3,21 +3,26 @@ function loads_student(students){
     students.forEach(element =>console.log(element));
     for(let i=0; i<=10; i++){
     fetch ('https://api.github.com/users/'+students[i],{
-            headers: new Headers({"Authorization": "Bearer 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"})})
+            headers: new Headers({"Authorization": "Bearer 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"})})
         .then(data => data.json())
         .then(results => affiche_student(results.avatar_url,results.login,results.followers,results.public_repos,results.followers_url))
         .then(console.log)
+    fetch('https://api.github.com/users/' + students[i] + '/repos', {
+            headers: new Headers({ "Authorization": "Bearer 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" })
+        })
+            .then(data => data.json())
+            .then(results => affiche_repos(results.full_name))
+            .then(console.log)
+    fetch ('https://api.github.com/users/'+students[i]+'/followers',{
+                headers: new Headers({"Authorization": "Bearer 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"})})
+            .then(data => data.json())
+            .then(results => affiche_followers(results.login))
+            .then(console.log)        
     }
 }
-function loads_repos(students){
-    students.forEach(element =>console.log(element));
-    for(let i=0; i<=10; i++){
-    fetch ('https://api.github.com/users/'+students[i]/'repos',{
-            headers: new Headers({"Authorization": "Bearer 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"})})
-        .then(data => data.json())
-        .then(console.log)
-    }
-}
+
+
+
  function affiche_student(avatar_url,login,followers,public_repos,followers_url){
     console.log(avatar_url)
     let d = document.createElement("img");
@@ -43,7 +48,22 @@ function loads_repos(students){
     follow_url.classList.add("url")
     
  }
-
+ function affiche_followers(login){
+    console.log(login)
+    let followers = document.createElement("a");
+    followers.innerHTML += login;
+    var followers_pseudo = document.getElementById("test").appendChild(followers);
+    followers_pseudo.classList.add("login");
+    followers_pseudo.setAttribute('href', "https://github.com/"+login)
+}
+function affiche_repos(full_name){
+    console.log(full_name)
+    let repos = document.createElement("a");
+    repos.innerHTML += full_name;
+    var repos_name = document.getElementById("test").appendChild(repos);
+    repos_name.classList.add("repos");
+    repos_name.setAttribute('href', "https://github.com/"+full_name)
+}
 function load_students(){
     fetch ('./etudiants.json')
         .then(data => data.json())
