@@ -1,0 +1,19 @@
+.img{
+    width: 25%;
+}
+.pseudo::before{
+    content:"Pseudo : ";
+}
+.follower::before{
+    content:"Nombre de followers : ";
+}
+.repository::before{
+    content: "Nombre de repository : ";
+}
+#test{
+    margin: auto;
+    padding: auto;
+    display: flex;
+    flex-direction: column;
+    border: solid 5px black;
+}
